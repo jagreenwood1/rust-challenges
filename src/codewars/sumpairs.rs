@@ -1,16 +1,32 @@
+// Given a list of integers and a single sum value, return the first two values
+// (parse from the left please) in order of appearance that add up to form the sum.
+
+// If there are two or more pairs with the required sum, the pair whose second
+// element has the smallest index is the solution.
+
 use std::collections::HashSet;
 
 fn sum_pairs(ints: &[i8], sum: i8) -> Option<(i8, i8)> {
+    for num_a in ints {
+        for num_b in ints {
+            if num_a + num_b == sum {
+                return Some((*num_a, *num_b));
+            }
+        }
+    }
+
+    None
+}
+
+fn sum_pairs_original(ints: &[i8], sum: i8) -> Option<(i8, i8)> {
     let mut seen: HashSet<i8> = HashSet::new();
     for number in ints {
         let difference = sum - number;
         if seen.contains(&difference) {
             return Some((difference, *number));
         }
-
         seen.insert(*number);
     }
-
     None
 }
 
