@@ -1,18 +1,22 @@
-fn fizzbuzz_to(n: u32) {
-    // `-> ()` is normally omitted
+fn fizzbuzz_to(n: u32) -> Vec<String> {
+    let mut result: Vec<String> = Vec::new();
+
     for n in 1..=n {
-        fizzbuzz(n);
+        result.push(fizzbuzz(n));
     }
+
+    return result;
 }
 
-fn fizzbuzz(n: u32) -> () {
-    // No return value means returning the unit type `()`
-    match (is_divisible_by(n, 3), is_divisible_by(n, 5)) {
-        (true, true) => println!("fizzbuzz"),
-        (true, false) => println!("fizz"),
-        (false, true) => println!("buzz"),
-        (false, false) => println!("{n}"),
-    }
+fn fizzbuzz(n: u32) -> String {
+    let result_str = match (is_divisible_by(n, 3), is_divisible_by(n, 5)) {
+        (true, true) => "fizzbuzz",
+        (true, false) => "fizz",
+        (false, true) => "buzz",
+        (false, false) => n.to_string().as_str(),
+    };
+
+    return result_str.to_string();
 }
 
 fn is_divisible_by(lhs: u32, rhs: u32) -> bool {
@@ -28,8 +32,8 @@ mod tests {
 
     use crate::other::fizzbuzz::fizzbuzz_to;
 
-    #[test_case(1, &[1])]
-    fn it_works(number: u64, expected: &[usize]) {
+    #[test_case(1, &["1".to_string()])]
+    fn it_works(number: u32, expected: &[String]) {
         let result = fizzbuzz_to(number);
         assert_eq!(result, expected);
     }
