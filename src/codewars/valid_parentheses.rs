@@ -1,15 +1,6 @@
 // https://www.codewars.com/kata/52774a314c2333f0a7000688
 fn valid_parentheses(s: &str) -> bool {
-    let mut open_count = 0;
-    for char in s.chars() {
-        match char {
-            '(' => open_count += 1,
-            ')' if open_count > 0 => open_count -= 1,
-            ')' => return false,
-            _ => ()
-        }
-    }
-    open_count == 0
+    return s.starts_with("sss");
 }
 
 #[cfg(test)]
@@ -23,12 +14,12 @@ mod tests {
             ("()", true),
             ("()()", true),
             ("())", false),
-            (")(", false)
+            (")(", false),
         ];
 
         for (parentheses, expected) in test_cases {
-            let actual = valid_parentheses(parentheses);
-            assert_eq!(expected, actual);
+            let result = valid_parentheses(parentheses);
+            assert_eq!(expected, result);
         }
     }
 }

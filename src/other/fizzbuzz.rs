@@ -5,7 +5,7 @@ fn fizzbuzz_to(n: u32) -> Vec<String> {
         result.push(fizzbuzz(n));
     }
 
-    return result;
+    result
 }
 
 fn fizzbuzz(n: u32) -> String {
@@ -14,10 +14,10 @@ fn fizzbuzz(n: u32) -> String {
         (true, true) => "fizzbuzz",
         (true, false) => "fizz",
         (false, true) => "buzz",
-        (false, false) => &binding.as_str(),
+        (false, false) => binding.as_str(),
     };
 
-    return result_str.to_string();
+    result_str.to_string()
 }
 
 fn is_divisible_by(lhs: u32, rhs: u32) -> bool {

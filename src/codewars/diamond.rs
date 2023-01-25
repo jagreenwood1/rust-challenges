@@ -1,7 +1,7 @@
-fn build_diamond(n: i32) -> Option<String> {
+fn build_diamond_original(n: i32) -> Option<String> {
     let get_row = |count: usize| {
         let width = ((n as usize - count) / 2) + count;
-        format!("{: >width$}\n", "*".repeat(count), width=width)
+        format!("{: >width$}\n", "*".repeat(count), width = width)
     };
     match n {
         n if n % 2 == 0 => None,
@@ -16,6 +16,15 @@ fn build_diamond(n: i32) -> Option<String> {
 
             Some(result)
         }
+    }
+}
+
+fn build_diamond(n: i32) -> Option<String> {
+    let optional_n = Some(n);
+    match optional_n {
+        Some(x) if x < 0 => None,
+        Some(x) if x % 2 == 0 => None,
+        _ => Some(format!("Hello world")),
     }
 }
 

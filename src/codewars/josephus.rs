@@ -25,7 +25,7 @@ fn josephus_survivor(person_count: i32, skip: i32) -> i32 {
     let range_of_people_ints = 1..person_count + 1;
     let last_person_index = range_of_people_ints.fold(0, |acc, cur| (acc + skip) % cur);
 
-    return last_person_index + 1;
+    last_person_index + 1
 }
 
 #[cfg(test)]
