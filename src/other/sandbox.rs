@@ -1,31 +1,20 @@
-// "A" and "T" are complements of each other, as "C" and "G".
+// https://www.codewars.com/kata/5648b12ce68d9daa6b000099/train/rust
 
-fn dna_strand(dna: &str) -> String {
-    dna.chars()
-        .map(|c| match c {
-            'A' => 'T',
-            'T' => 'A',
-            'C' => 'G',
-            'G' => 'C',
-            _ => '_',
-        })
-        .collect()
+fn number(bus_stops: &[(i32, i32)]) -> i32 {
+    bus_stops
+        .iter()
+        .fold(0, |result, (on, off)| result + on - off)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::dna_strand;
-
-    fn dotest(s: &str, expected: &str) {
-        let actual = dna_strand(s);
-        eprintln!("With dna = \"{s}\"\nExpected \"{expected}\" but got \"{actual}\"");
-        assert!(actual == expected);
-    }
-
-    #[test]
-    fn fixed_tests() {
-        dotest("AAAA", "TTTT");
-        dotest("ATTGC", "TAACG");
-        dotest("GTAT", "CATA");
-    }
+#[test]
+fn returns_expected() {
+    assert_eq!(number(&[(10, 0), (3, 5), (5, 8)]), 5);
+    assert_eq!(
+        number(&[(3, 0), (9, 1), (4, 10), (12, 2), (6, 1), (7, 10)]),
+        17
+    );
+    assert_eq!(
+        number(&[(3, 0), (9, 1), (4, 8), (12, 2), (6, 1), (7, 8)]),
+        21
+    );
 }
