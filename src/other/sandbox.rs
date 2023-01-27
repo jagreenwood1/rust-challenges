@@ -1,15 +1,9 @@
-/// https://www.codewars.com/kata/5839edaa6754d6fec10000a2/train/rust
-
-fn find_missing_letter(chars: &[char]) -> char {
-    for (index, c) in chars.iter().enumerate() {
-        let expected_next = std::char::from_u32(*c as u32 + 1).unwrap_or(*c);
-
-        if expected_next != chars[index + 1] {
-            return expected_next;
-        }
+fn odd_or_even(numbers: Vec<i32>) -> String {
+    match numbers.iter().sum::<i32>() % 2 {
+        0 => "even",
+        _ => "odd",
     }
-
-    panic!("No missing characters")
+    .to_string()
 }
 
 #[cfg(test)]
@@ -17,8 +11,31 @@ mod tests {
     use super::*;
 
     #[test]
-    fn example_tests() {
-        assert_eq!(find_missing_letter(&['a', 'b', 'c', 'd', 'f']), 'e');
-        assert_eq!(find_missing_letter(&['O', 'Q', 'R', 'S']), 'P');
+    fn test_empty_array() {
+        assert_eq!(odd_or_even(vec![]), "even");
+    }
+    #[test]
+    fn test_single_even() {
+        assert_eq!(odd_or_even(vec![0]), "even");
+    }
+    #[test]
+    fn test_single_odd() {
+        assert_eq!(odd_or_even(vec![1]), "odd");
+    }
+    #[test]
+    fn test_even() {
+        assert_eq!(odd_or_even(vec![0, 1, 5]), "even");
+    }
+    #[test]
+    fn test_odd() {
+        assert_eq!(odd_or_even(vec![0, 1, 4]), "odd");
+    }
+    #[test]
+    fn test_negative_even() {
+        assert_eq!(odd_or_even(vec![0, -1, -5]), "even");
+    }
+    #[test]
+    fn test_negative_odd() {
+        assert_eq!(odd_or_even(vec![0, -1, 2]), "odd");
     }
 }
